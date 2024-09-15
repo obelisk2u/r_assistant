@@ -1,0 +1,156 @@
+## 7.2 Fake-data simulation and regression: 
+Simulate 100 data points from the linear model, $y =  a + bx$ + error, with $a = 5$, $b = 7$, the values of $x$ being sampled at random from a uniform distribution on the range $[0, 50]$, and errors that are normally distributed with mean 0 and standard deviation 3. 
+
+### 7.2a 
+Fit a regression line to these data and display the output. 
+
+
+### 7.2b 
+Graph a scatterplot of the data and the regression line. 
+
+
+### 7.2c 
+Use the `text` function in R to add the formula of the fitted line to the graph. 
+
+## 7.3 Fake-data simulation and fitting the wrong model: 
+Simulate 100 data points from the model $y = a + b x + c x^2$ + error, with the values of $x$ being sampled at random from a uniform  distribution on the range $[0, 50]$, errors that are normally distributed with mean 0 and standard  deviation 3, and $a$, $b$, $c$ chosen so that a scatterplot of the data shows a clear nonlinear curve. 
+
+
+### 7.3 a
+Fit a regression line `stan_glm(y ~ x)` to these data and display the output. 
+
+### 7.3b
+Graph a scatterplot of the data and the regression line. This is the best-fit linear regression.  What does “best-fit” mean in this context?
+ would be the best fit LINEAR model, however the points follow a quadratic trend so it would not be the best for finding rpedictive values
+
+
+## 7.6 Formulating comparisons as regression models: 
+Take the election forecasting model and simplify it by creating a binary predictor defined as $x = 0$ if income growth is less than 2% and $x = 1$ if income growth is more than 2%.
+
+
+### 7.6a
+Compute the difference in incumbent party's vote share on average, comparing those two  groups of elections, and determine the standard error for this difference.
+
+
+### 7.6b
+Regress incumbent party's vote share on the binary predictor of income growth and check  that the resulting estimate and standard error are the same as above. 
+
+
+
+## 8.8 Comparing lm and stan_glm: 
+Use simulated data to compare least squares estimation to default Bayesian regression: 
+
+### 8.8a
+Simulate 100 data points from the model, $y = 2 + 3x$ + error, with predictors $x$ drawn from a uniform distribution from 0 to 20 and with independent errors drawn from the normal distribution with mean 0 and standard deviation 5. Fit the regression of $y$ on $x$ data using `lm` and `stan_glm` (using its default settings) and check that the two programs give nearly identical results.
+
+
+### 8.8b
+Plot the simulated data and the two fitted regression lines. 
+
+
+### 8.8c
+Repeat the two steps above, but try to create conditions for your simulation so that `lm` and `stan_glm` give much different results. 
+
+## 10.1 Regression with interactions: 
+Simulate 100 data points from the model, $y = b_0 + b_1 x +  b_2 z + b_3 x z$ + error, with a continuous predictor $x$ and a binary predictor $z$, coefficients $b = c(1, 2, -1, -2)$, and errors drawn independently from a normal distribution with mean 0  and standard deviation 3, as follows. For each data point $i$, first draw $z_i$, equally likely to take on the values 0 and 1. Then draw $x_i$ from a normal distribution with mean $z_i$ and standard deviation 1. Then draw the error from its normal distribution and compute $y_i$.
+
+### 10.1a
+Display your simulated data as a graph of $y$ vs $x$, using dots and circles for the points with $z$ = 0 and 1, respectively. 
+
+
+### 10.1b
+Fit a regression predicting $y$ from $x$ and $z$ with no interaction. Make a graph with the data and two parallel lines showing the fitted model. 
+
+
+### 10.1c
+Fit a regression predicting $y$ from $x$, $z$, and their interaction. Make a graph with the data and two lines showing the fitted model. 
+
+
+## 10.2 Regression with interactions: 
+Here is the output from a fitted linear regression of outcome $y$ on  pre-treatment predictor $x$, treatment indicator $z$, and their interaction: 
+
+````{verbatim}
+            Mediam MAD_SD
+(Intercept) 1.2    0.2
+x           1.6    0.4
+z           2.7    0.3
+x:z         0.7    0.5
+
+Auxiliary parameter(s):
+      Median MAD_SD
+sigma 0.4    0.0
+````
+
+### 10.2a
+Write the equation of the estimated regression line of $y$ on $x$ for the treatment group and the control group, and the equation of the estimated regression line of $y$ on $x$ for the control group. 
+
+
+### 10.2b
+Graph with pen on paper the two regression lines, assuming the values of $x$ fall in the range $(0, 10)$. On this graph also include a scatterplot of data (using open circles for treated units and dots for controls) that are consistent with the fitted model. 
+
+
+## 10.5 Regression modeling and prediction: 
+The folder `KidIQ` contains a subset of the children and mother data discussed earlier in the chapter. You have access to children's test scores at age 3,  mother's education, and the mother's age at the time she gave birth for a sample of 400 children. 
+
+
+### 10.5a
+Fit a regression of child test scores on mother's age, display the data and fitted model, check assumptions, and interpret the slope coefficient. Based on this analysis, when do you recommend mothers should give birth? What are you assuming in making this recommendation? 
+
+
+### 10.5b
+Repeat this for a regression that further includes mother's education, interpreting both slope coefficients in this model. Have your conclusions about the timing of birth changed? 
+
+
+### 10.5c
+Now create an indicator variable reflecting whether the mother has completed high school or not. Consider interactions between high school completion and mother's age. Also create a plot that shows the separate regression lines for each high school completion status group. 
+
+
+### 10.5d
+Finally, fit a regression of child test scores on mother's age and education level for the first 200 children and use this model to predict test scores for the next 200. Graphically display comparisons of the predicted and actual scores for the final 200 children. 
+
+
+## 10.6 Regression models with interactions: 
+The folder `Beauty` contains data (use file `beauty.csv`) from Hamermesh and Parker (2005) on student evaluations of instructors' beauty and teaching quality for several courses at the University of Texas. The teaching evaluations were conducted at the end of the semester, and the beauty judgments were made later, by six students who had not attended the classes and were not aware of the course evaluations. 
+
+See also Felton, Mitchell, and Stinson (2003) for more on this topic. 
+
+
+### 10.6a
+Run a regression using beauty (the variable `beauty`) to predict course evaluations (`eval`),  adjusting for various other predictors. Graph the data and fitted model, and explain the meaning of each of the coefficients along with the residual standard deviation. Plot the residuals versus fitted values. 
+
+
+### 10.6b
+Fit some other models, including beauty and also other predictors. Consider at least one model with interactions. For each model, explain the meaning of each of its estimated coefficients.
+
+
+## 10.7 Predictive simulation for linear regression:
+Take one of the models from the previous exercise.
+
+### 10.7a
+Instructor A is a 50-year-old woman who is a native English speaker and has a beauty score of -1. Instructor B is a 60-year-old man who is a native English speaker and has a beauty score of -0.5. Simulate 1000 random draws of the course evaluation rating of these two instructors. In your simulation, use `posterior_predict` to account for the uncertainty in the regression parameters as well as predictive uncertainty. 
+
+
+### 10.7b
+Make a histogram of the difference between the course evaluations for A and B. What is the probability that A will have a higher evaluation? 
+
+
+## 10.8 How many simulation draws: 
+Take the model from Exercise 10.6 that predicts course evaluations from beauty and other predictors. 
+
+### 10.8a
+Display and discuss the fitted model. Focus on the estimate and standard error for the coefficient of beauty. 
+
+
+### 10.8b
+Compute the median and mad sd of the posterior simulations of the coefficient of beauty, and check that these are the same as the output from printing the fit. 
+
+### 10.8c
+Fit again, this time setting `iter` = 1000 in your `stan_glm` call. Do this a few times in order to get a sense of the simulation variability. 
+
+
+### 10.8d
+Repeat the previous step, setting `iter` = 100 and then `iter` = 10. 
+
+
+### 10.8e
+How many simulations were needed to give a good approximation to the mean and standard error for the coefficient of beauty? 
